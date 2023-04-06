@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import Modal from './Modal';
+import Modal from '../Modal';
 import InfoGame from './InfoGame';
 
 function GameCard({ game }) {
