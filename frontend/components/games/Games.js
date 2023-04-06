@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext } from 'react'
 import GameCard from './GameCard';
 import { SearchContext } from '@/context/SearchProvider';
 
@@ -155,12 +155,28 @@ function Games() {
         );
       });
 
-      const handleSearchTermChange = (event) => {
-        setSearchTerm(event.target.value);
-      };
+      const handleSearch =(e)=>{
+        setSearchTerm(e.target.value);
+    }
 
   return (
-    <div>
+    <>
+    <div className="flex items-center mt-6">
+      <hr className="w-full mr-8 h-1 bg-orange-400" />
+      <span className="text-2xl font-bold text-orange-500">Juegos</span>
+      <hr className="w-full ml-8 h-1 bg-orange-400" />
+    </div>
+        
+
+
+    <div className='flex justify-center mt-10'>
+      <input
+         className="inline-flex md:hidden border-2 border-gray-300 bg-white h-10 px-5 pr-32 rounded-lg text-sm focus:outline-none"
+        placeholder="Search"
+         value={searchTerm}
+        onChange={handleSearch}
+        />
+      </div>
         <section className='py-16'>
             <div className='container mx-auto'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-[30px] max-w-sm
@@ -168,12 +184,23 @@ function Games() {
                 {filteredGames.map((game) =>{
                     return <GameCard game={game} key={game.id}/>
                 })}
-
                 </div>
             </div>
         </section>
-    </div>
+    </>
   );
 };
 
 export default Games;
+
+/* import React from "react";
+const Juegos = () => {
+  return (
+    <div className="flex items-center">
+      <hr className="w-full mr-8 h-1 bg-black" />
+      <span className="text-2xl font-bold">Juegos</span>
+      <hr className="w-full ml-8 h-1 bg-black" />
+    </div>
+  );
+};
+export default Juegos; */
