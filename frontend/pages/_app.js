@@ -1,6 +1,9 @@
+import { SearchContextProvider } from '@/context/SearchProvider'
 import '@/styles/global.css'
 
-const App = ({ Component, pageProps }) => <Component {...pageProps} />
-
-export default App
-
+export default function App({ Component, pageProps }) {
+  return (
+  <SearchContextProvider>
+    <Component {...pageProps} />
+    </SearchContextProvider>)
+};
