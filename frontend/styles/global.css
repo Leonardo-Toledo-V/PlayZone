@@ -4,7 +4,10 @@
 
 @layer components {
     .tableItem{
-        @apply text-lg px-6 py-3
+        @apply py-3 px-6 bg-slate-800 text-sm font-semibold tracking-wide
+    }
+    .tableGame{
+        @apply py-3 px-6 text-sm text-gray-700 whitespace-nowrap
     }
 
 };

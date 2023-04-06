@@ -31,7 +31,8 @@ function Carrousel() {
 }
 
   return (
-    <div className='max-w-[1400px] h-[200px] sm:h-[500px] m-auto pt-4 px-4 relative group shadow-lg' ref={ref}>
+    <div className='bg-gray-100 h-[250px] sm:h-[350px] md:h-[450px] lg:h-[550px] xl:h-[600px] py-4 shadow-sm'>
+      <div className='max-w-[1400px] h-[200px] sm:h-[300px] md:h-[400px] lg:h-[500px] xl:h-[500px] m-auto pt-4 px-4 relative group shadow-xl' ref={ref}>
       {images.map((image, key) => (
         <img
           key={key}
@@ -41,6 +42,9 @@ function Carrousel() {
         />
       ))} 
     </div>
+
+    </div>
+    
   );
 }
 

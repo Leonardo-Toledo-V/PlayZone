@@ -161,7 +161,7 @@ function Games() {
 
   return (
     <>
-    <div className="flex items-center mt-6">
+    <div className="flex items-center mt-6 pt-8">
       <hr className="w-full mr-8 h-1 bg-orange-400" />
       <span className="text-2xl font-bold text-orange-500">Juegos</span>
       <hr className="w-full ml-8 h-1 bg-orange-400" />
@@ -169,7 +169,7 @@ function Games() {
         
 
 
-    <div className='flex justify-center mt-10'>
+    <div className='flex justify-center mt-6'>
       <input
          className="inline-flex md:hidden border-2 border-gray-300 bg-white h-10 px-5 pr-32 rounded-lg text-sm focus:outline-none"
         placeholder="Search"
