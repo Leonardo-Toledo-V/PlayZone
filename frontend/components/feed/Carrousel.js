@@ -20,14 +20,18 @@ function Carrousel() {
       current = current === total - 1 ? 0 : current + 1;
     };
     imageSlider();
-    let interval = setInterval(imageSlider, 7000);
+    let interval = setInterval(imageSlider, 4000);
     return () => {
       clearInterval(interval);
     };
   }, [ref]);
 
+  const handleSearch =(e)=>{
+    setSearchTerm(e.target.value);
+}
+
   return (
-    <div className='max-w-[1400px] h-[500px]  m-auto pt-4 px-4 relative group shadow-lg' ref={ref}>
+    <div className='max-w-[1400px] h-[200px] sm:h-[500px] m-auto pt-4 px-4 relative group shadow-lg' ref={ref}>
       {images.map((image, key) => (
         <img
           key={key}
