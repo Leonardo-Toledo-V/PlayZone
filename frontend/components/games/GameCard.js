@@ -8,7 +8,7 @@ function GameCard({ game }) {
     return (
       <Fragment>
         <div onClick={()=>setShowModal(true)}>
-            <div className="shadow-xl h-[280px] mb-4 relative cursor-pointer hover:scale-105 transition duration-300 border-t-4 border-orange-500">
+            <div className="bg-white shadow-xl h-[300px] mb-4 relative cursor-pointer hover:scale-105 transition duration-300 border-t-4 border-orange-400">
                 <div className="overflow-hidden group transition">
                     <div className="w-full h-full flex justify-center items-center">
                         <div className="w-[200px] mx-auto flex justify-center items-center">
@@ -21,7 +21,7 @@ function GameCard({ game }) {
                     </div>
                 </div>
 
-                <div className="m-4">
+                <div className="m-3">
                     <div className="font-bold">{title}</div>
                     <h2 className="font-semibold text-orange-600 mb-1">
                         ${price}
