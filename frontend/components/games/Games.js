@@ -162,9 +162,9 @@ function Games() {
   return (
     <>
     <div className="flex items-center mt-6 pt-8">
-      <hr className="w-full mr-8 h-1 bg-orange-400" />
-      <span className="text-2xl font-bold text-orange-500">Juegos</span>
-      <hr className="w-full ml-8 h-1 bg-orange-400" />
+      <hr className="w-full mr-8 h-0.5 bg-orange-400" />
+      <span className="text-xl font-sm text-orange-500">Videogames</span>
+      <hr className="w-full ml-8 h-0.5 bg-orange-400" />
     </div>
         
     <div className='flex justify-center mt-6'>
@@ -190,15 +190,3 @@ function Games() {
 };
 
 export default Games;
-
-/* import React from "react";
-const Juegos = () => {
-  return (
-    <div className="flex items-center">
-      <hr className="w-full mr-8 h-1 bg-black" />
-      <span className="text-2xl font-bold">Juegos</span>
-      <hr className="w-full ml-8 h-1 bg-black" />
-    </div>
-  );
-};
-export default Juegos; */

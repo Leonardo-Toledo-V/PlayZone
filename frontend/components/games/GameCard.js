@@ -22,8 +22,8 @@ function GameCard({ game }) {
                 </div>
 
                 <div className="m-3">
-                    <div className="font-bold">{title}</div>
-                    <h2 className="font-semibold text-orange-600 mb-1">
+                    <div className="font-sm text-gray-600">{title}</div>
+                    <h2 className="font-sm  text-orange-400 mb-1">
                         ${price}
                     </h2>
                 </div>

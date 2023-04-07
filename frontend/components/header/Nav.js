@@ -33,8 +33,8 @@ function Nav() {
                 </div>
             </div>
             <div className="flex items-center gap-6">
-                <button onClick={handleLogin} className="bg-orange-500 text-white px-4 py-1 rounded-md hover:bg-orange-600 transition duration-300">
-                    Login
+                <button onClick={handleLogin} className="bg-orange-500 text-gray-300 text-sm px-4 py-1 rounded-md hover:bg-orange-600 transition duration-300">
+                    admin
                 </button>
             </div>
         </nav>

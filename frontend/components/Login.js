@@ -56,8 +56,6 @@ import Swal from 'sweetalert2';
                 />
               </div>
             </div>
-
-
             <div>
               <button
                 type="submit"
