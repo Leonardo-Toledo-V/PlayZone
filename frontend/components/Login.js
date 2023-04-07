@@ -1,12 +1,20 @@
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 
  function Login() {
     const router = useRouter();
   
     const handleLogin = (e)=>{
       e.preventDefault();
-      router.push("/dashboard")
+      Swal.fire({
+        icon: 'success',
+        title: 'Login Success',
+        showConfirmButton: false,
+        timer: 1500
+      }).then(() => {
+        router.push("/dashboard");
+    });
     }
   return (
     <>
