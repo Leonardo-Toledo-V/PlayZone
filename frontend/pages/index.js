@@ -1,6 +1,7 @@
 import Head from 'next/head'
 import Feed from '@/components/Feed'
 import Nav from '@/components/header/Nav'
+import Footer from '@/components/Footer'
 
 export default function Home() {
     return (
@@ -12,12 +13,13 @@ export default function Home() {
             <link rel="icon" href="/gaming.png" />
           </Head>
                 {/*Header  */}
-                <Nav></Nav>
+                <Nav/>
                 {/* Feed */}         
-                <Feed></Feed>
-                {/* Feet */}
+                <Feed/>
+                {/* Footer */}
+                <Footer/>
                 
-
         </>
+        
     )
 }

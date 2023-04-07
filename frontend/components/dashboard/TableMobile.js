@@ -1,9 +1,15 @@
 import { SearchContext } from '@/context/SearchProvider';
-import React, { Fragment, useContext } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
+import Swal from 'sweetalert2';
+import Modal from '../Modal';
+import Update from './crud/Update';
 
 function TableMobile(props) {
     const testData = props.testData;
     const { searchTerm } = useContext(SearchContext);
+
+    const [showModal, setShowModal] = useState(false);
+    const [id, setId] = useState(null);
 
     const filteredGames = testData.filter((game) => {
         return (
@@ -11,6 +17,51 @@ function TableMobile(props) {
           game.description.toLowerCase().includes(searchTerm.toLowerCase())
         );
       });
+
+
+      const handleDelete =(e)=>{
+        e.preventDefault();
+        const swalWithBootstrapButtons = Swal.mixin({
+            customClass: {
+              confirmButton: 'cursor-pointer p-1.5 text-sm font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-sm bg-opacity-50 m-2',
+              cancelButton: 'cursor-pointer p-1.5 text-sm font-medium uppercase tracking-wider text-red-800 bg-red-200 rounded-sm bg-opacity-50 m-2',
+            },
+            buttonsStyling: false
+          })
+          
+          swalWithBootstrapButtons.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'No, cancel!',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              swalWithBootstrapButtons.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              ).then(() => {window.location.reload();});
+            } else if (
+              /* Read more about handling dismissals below */
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              swalWithBootstrapButtons.fire(
+                'Cancelled',
+                'Your imaginary file is safe :)',
+                'error',
+              )
+            }
+            
+          })
+        
+      }
+
+      const handleUpdate = (e)=>{
+        setShowModal(true);
+        setId(e.target.id)
+      }
 
     return (
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden">
@@ -33,12 +84,12 @@ function TableMobile(props) {
                             </div>
                             <div className='flex items-center justify-center space-x-2'>
                             <div>
-                                    <span className="cursor-pointer p-1.5 text-sm font-medium  tracking-wider text-blue-800 bg-blue-200 rounded-sm bg-opacity-50">
+                                    <span id={game.id} onClick={handleUpdate} className="cursor-pointer p-1.5 text-sm font-medium  tracking-wider text-blue-800 bg-blue-200 rounded-sm bg-opacity-50">
                                         Update
                                     </span>
                                 </div>
                                 <div>
-                                    <span className="cursor-pointer p-1.5 text-sm font-medium  tracking-wider text-red-800 bg-red-200 rounded-sm bg-opacity-50">
+                                    <span onClick={handleDelete} className="cursor-pointer p-1.5 text-sm font-medium  tracking-wider text-red-800 bg-red-200 rounded-sm bg-opacity-50">
                                         Delete
                                     </span>
                                 </div>
@@ -50,6 +101,11 @@ function TableMobile(props) {
                     </Fragment>
                 )
             })}
+              <Fragment>
+        <Modal isVisible={showModal} onClose={()=> setShowModal(false)}>
+            <Update testData={testData} id={id}/>
+        </Modal>
+    </Fragment>
         </div>
     )
 }
