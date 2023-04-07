@@ -1,9 +1,13 @@
 import { SearchContextProvider } from '@/context/SearchProvider'
+import { ShopContextProvider } from '@/context/ShopProvider'
 import '@/styles/global.css'
 
 export default function App({ Component, pageProps }) {
   return (
-  <SearchContextProvider>
+    <ShopContextProvider>
+       <SearchContextProvider>
     <Component {...pageProps} />
-    </SearchContextProvider>)
+    </SearchContextProvider>
+    </ShopContextProvider>
+  )
 };

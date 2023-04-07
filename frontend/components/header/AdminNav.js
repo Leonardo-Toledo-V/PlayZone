@@ -1,9 +1,8 @@
 import { useRouter } from 'next/router';
-import React, {useContext} from 'react'
+import React from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-import { SearchContext } from '@/context/SearchProvider';
 
 const user = {
   name: 'Leonardo Toledo',
@@ -58,10 +57,10 @@ const handleDashboard =(e)=>{
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                          <a onClick={handleDashboard} className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'> 
+                          <a onClick={handleDashboard} className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer'> 
                           Dashboard
                           </a>
-                          <a onClick={handleSales}  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium'>
+                          <a onClick={handleSales}  className='text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium cursor-pointer'>
                           Sales
                           </a>
                       </div>
