@@ -167,8 +167,6 @@ function Games() {
       <hr className="w-full ml-8 h-1 bg-orange-400" />
     </div>
         
-
-
     <div className='flex justify-center mt-6'>
       <input
          className="inline-flex md:hidden border-2 border-gray-300 bg-white h-10 px-5 pr-32 rounded-lg text-sm focus:outline-none"

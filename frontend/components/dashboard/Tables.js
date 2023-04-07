@@ -1,7 +1,7 @@
 import React from 'react'
 import TableMobile from './TableMobile';
 import TableCard from './TableCard';
-import SearchBar from './SearchBar';
+import DashboardSearch from './DashboardSearch';
 
 function Table() {
   const testData =[
@@ -80,7 +80,7 @@ function Table() {
 
   return (
     <>
-                <SearchBar/>
+                <DashboardSearch/>
                 <div className='p-5  bg-gray-100 flex-grow'>
                         <TableCard testData={testData}/>
                         <TableMobile testData={testData}/>

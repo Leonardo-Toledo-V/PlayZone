@@ -1,12 +1,15 @@
+import { ShopContext } from '@/context/ShopProvider';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useContext } from 'react';
 
 function InfoGame({ info }) {
-    const { title, cover, price, description } = info
+    const {id, title, cover, price, description } = info;
     const router = useRouter();
+    const { setShop } = useContext(ShopContext);
 
     const handleBuy = (e) => {
         e.preventDefault();
+        setShop(id);
         router.push("/shop");
     }
 

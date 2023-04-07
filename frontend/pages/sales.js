@@ -1,4 +1,6 @@
+import Pagination from '@/components/dashboard/Pagination'
 import SalesCard from '@/components/dashboard/SalesCard'
+import SalesSearch from '@/components/dashboard/SalesSearch'
 import AdminNav from '@/components/header/AdminNav'
 import Head from 'next/head'
 import React from 'react'
@@ -13,7 +15,9 @@ function sales() {
             <link rel="icon" href="/gaming.png" />
           </Head>
         <AdminNav/>
+        <SalesSearch/>
         <SalesCard/>
+        <Pagination/>
     </>
   )
 }
