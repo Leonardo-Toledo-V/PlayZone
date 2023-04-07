@@ -1,7 +1,10 @@
 import { SearchContext } from '@/context/SearchProvider';
-import React, { useContext } from 'react'
+import React, { Fragment, useContext, useState } from 'react'
+import Modal from '../Modal';
+import Add from './crud/Add';
 
 function DashboardSearch() {
+  const [showModal, setShowModal] = useState(false);
 
 const { searchTerm, setSearchTerm } = useContext (SearchContext);
 const handleSearch =(e)=>{
@@ -18,8 +21,13 @@ const handleSearch =(e)=>{
                   value={searchTerm}
                   onChange={handleSearch}
               />
-      <span className="cursor-pointer px-8 py-2 text-sm font-medium  tracking-wider text-green-800 bg-green-200 rounded-sm bg-opacity-50">Add</span>             
-    </div>
+              <Fragment>
+              <span onClick={()=>setShowModal(true)} className="cursor-pointer px-8 py-2 text-sm font-medium  tracking-wider text-green-800 bg-green-200 rounded-sm bg-opacity-50">Add</span>             
+              <Modal isVisible={showModal} onClose={()=> setShowModal(false)}>
+                  <Add/>
+              </Modal>
+              </Fragment>
+       </div>
   </header>
   )
 }
