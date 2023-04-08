@@ -1,20 +1,40 @@
 import { LockClosedIcon } from '@heroicons/react/20/solid'
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 import Swal from 'sweetalert2';
+import axios from '@/libs/axios';
+import Cookies from 'js-cookie';
 
  function LoginForm() {
-    const router = useRouter();
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
+  const form = new FormData();
+  
   
     const handleLogin = (e)=>{
       e.preventDefault();
-      Swal.fire({
-        icon: 'success',
-        title: 'Login Success',
-        showConfirmButton: false,
-        timer: 1500
-      }).then(() => {
-        router.push("/dashboard");
-    });
+      form.append('username', username);
+      form.append('password', password);
+      axios.post('/api/login',form).then(function(response){
+       Cookies.set("username",response.data.username);
+        Cookies.set("loggedIn", true);
+        Swal.fire({
+          icon: 'success',
+          title:  "Welcome " + response.data.username,
+          showConfirmButton: false,
+          timer: 1500
+        }).then(function(){
+          router.push('/dashboard');
+        });
+      }).catch(function(error) {
+        Swal.fire({
+          icon: 'error',
+          title: error.response.data.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      });
     }
   return (
     <>
@@ -28,14 +48,14 @@ import Swal from 'sweetalert2';
             />
           </div>
           <form onSubmit={handleLogin} className="mt-8 space-y-6" action="#" method="POST">
-            <input type="hidden" name="remember" defaultValue="true" />
             <div className="-space-y-px rounded-md shadow-sm">
               <div>
                 <input
                   id="user"
                   type="text"
                   required
-                  autocomplete="off"
+                  autoComplete="off"
+                  onChange={(e) => setUsername(e.target.value)}
                   className="relative block w-full rounded-t-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="User"
                 />
@@ -47,8 +67,9 @@ import Swal from 'sweetalert2';
                 <input
                   id="password"
                   type="password"
-                  autocomplete="off"
+                  autoComplete="off"
                   required
+                  onChange={(e) => setPassword(e.target.value)}
                   className="relative block w-full rounded-b-md border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   placeholder="Password"
                 />
