@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Videogames;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
+use \Illuminate\Database\QueryException;
 
 class VideogamesController extends Controller
 {
@@ -38,7 +39,7 @@ class VideogamesController extends Controller
         $videogame->description = $request->input('description');
         $videogame->price = $request->input('price');
         $videogame->save();
-    } catch (\Illuminate\Database\QueryException $e) {
+    } catch (QueryException $e) {
         $response = [
             'status' => 'error',
             'message' => 'You missed something',
