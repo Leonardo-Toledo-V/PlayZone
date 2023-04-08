@@ -18,8 +18,8 @@ class AdministratorsFactory extends Factory
     public function definition(): array
     {
         return [
-            'username' =>'admin',
-            'password' =>Hash::make('admin'),
+            'username' =>$this->faker->firstNameMale(),
+            'password' =>Hash::make('admi123'),
         ];
     }
 }
