@@ -11,9 +11,19 @@ class VideogamesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        return Videogames::all();
+        $perPage = 10;
+        $page = $request->query('page', 1);
+        $videogames = Videogames::paginate($perPage, ['*'], 'page', $page);
+        if ($page > $videogames->lastPage()) {
+            $response = [
+                'status' => 'error',
+                'message' => 'Page not found'
+            ];
+            return response()->json($response, 404);
+        }
+        return $videogames;
     }
 
     /**
@@ -87,10 +97,10 @@ class VideogamesController extends Controller
             ];
             return response()->json($response,404);
         }
-        $videogame->title = $request->input('title');
-        $videogame->cover = $request->input('cover');
-        $videogame->description = $request->input('description');
-        $videogame->price = $request->input('price');
+        $videogame->fill($request->only([
+            'title', 'cover', 'description', 'price'
+        ]));
+        
         $videogame->save();
 
         $response = [
