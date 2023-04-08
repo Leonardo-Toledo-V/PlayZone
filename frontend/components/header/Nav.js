@@ -1,6 +1,7 @@
 import { SearchContext } from '@/context/SearchProvider';
 import { useRouter } from 'next/router';
 import React, { useContext } from 'react'
+import Cookies from 'js-cookie'
 
 function Nav() {
     const router = useRouter();
@@ -8,7 +9,11 @@ function Nav() {
 
     const handleLogin =(e)=>{
         e.preventDefault();
-        router.push("/login")
+        if(Cookies.get('username')){
+            router.push('/dashboard');
+        }else{
+            router.push("/login")
+        }
     }
     const handleSearch =(e)=>{
         setSearchTerm(e.target.value);

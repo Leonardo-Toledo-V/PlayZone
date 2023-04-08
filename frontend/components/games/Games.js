@@ -1,11 +1,63 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import GameCard from './GameCard';
 import { SearchContext } from '@/context/SearchProvider';
+import axios from '@/libs/axios';
 
 function Games() {
+    const [data, setData] = useState([]);
     const { searchTerm, setSearchTerm } = useContext(SearchContext);
+    useEffect(()=>{
+        axios.get('/api/videogames').then(function(response){
+            setData((response.data.data))
+            console.log(response.data.data)
+           });
+    },[1])
+    
 
-    const testData =[
+  
+    const filteredGames = data.filter((game) => {
+        return (
+          game.title.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      });
+
+      const handleSearch =(e)=>{
+        setSearchTerm(e.target.value);
+    }
+
+  return (
+    <>
+    <div className="flex items-center mt-6 pt-8">
+      <hr className="w-full mr-8 h-0.5 bg-orange-400" />
+      <span className="text-xl font-sm text-orange-500">Videogames</span>
+      <hr className="w-full ml-8 h-0.5 bg-orange-400" />
+    </div>
+        
+    <div className='flex justify-center mt-6'>
+      <input
+         className="inline-flex md:hidden border-2 border-gray-300 bg-white h-10 px-5 pr-32 rounded-lg text-sm focus:outline-none"
+        placeholder="Search"
+         value={searchTerm}
+        onChange={handleSearch}
+        />
+      </div>
+        <section className='py-16'>
+            <div className='container mx-auto'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-[30px] max-w-sm
+                mx-auto md:max-w-none md:mx-0'>
+                {filteredGames.map((game) =>{
+                    return <GameCard game={game} key={game.id}/>
+                })}
+                </div>
+            </div>
+        </section>
+    </>
+  );
+};
+
+export default Games;
+
+  /* const testData =[
         {
             id: '122',
             title: 'Grand Theft Auto V',
@@ -76,47 +128,4 @@ function Games() {
             price: 12.99,
             description: 'This is the best game'
         }
-    ];
-
-    const filteredGames = testData.filter((game) => {
-        return (
-          game.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          game.description.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      });
-
-      const handleSearch =(e)=>{
-        setSearchTerm(e.target.value);
-    }
-
-  return (
-    <>
-    <div className="flex items-center mt-6 pt-8">
-      <hr className="w-full mr-8 h-0.5 bg-orange-400" />
-      <span className="text-xl font-sm text-orange-500">Videogames</span>
-      <hr className="w-full ml-8 h-0.5 bg-orange-400" />
-    </div>
-        
-    <div className='flex justify-center mt-6'>
-      <input
-         className="inline-flex md:hidden border-2 border-gray-300 bg-white h-10 px-5 pr-32 rounded-lg text-sm focus:outline-none"
-        placeholder="Search"
-         value={searchTerm}
-        onChange={handleSearch}
-        />
-      </div>
-        <section className='py-16'>
-            <div className='container mx-auto'>
-                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-[30px] max-w-sm
-                mx-auto md:max-w-none md:mx-0'>
-                {filteredGames.map((game) =>{
-                    return <GameCard game={game} key={game.id}/>
-                })}
-                </div>
-            </div>
-        </section>
-    </>
-  );
-};
-
-export default Games;
+    ]; */

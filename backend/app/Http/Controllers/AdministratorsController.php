@@ -28,7 +28,8 @@ class AdministratorsController extends Controller
     
         $response = [
             'status' => 'success',
-            'message' => 'Administrator found'
+            'message' => 'Administrator found',
+            'username' => $user->username,
         ];
         return response()->json($response, 200);
     }

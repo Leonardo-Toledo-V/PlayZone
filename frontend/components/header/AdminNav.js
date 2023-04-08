@@ -1,27 +1,27 @@
 import { useRouter } from 'next/router';
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Fragment } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
-
-const user = {
-  name: 'Leonardo Toledo',
-  imageUrl:
-    'https://images.unsplash.com/photo-1608549036505-ead5b1de5417?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80',
-}
-const userNavigation = [
-  { name: 'Sign out', href: '#' },
-]
-
-function classNames(...classes) {
-  return classes.filter(Boolean).join(' ')
-}
+import Cookies from 'js-cookie';
 
  function AdminNav() {
   const router = useRouter();
+  const [username, setUsername]= useState("");
+  useEffect(()=>{
+    setUsername(Cookies.get('username'));
+  },[]);
+ 
+  const user = {
+    name: username,
+    imageUrl:
+      'https://images.unsplash.com/photo-1608549036505-ead5b1de5417?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80',
+  }
 
   const handleLogout =(e)=>{
       e.preventDefault();
+      Cookies.remove("loggedIn")
+      Cookies.remove("username")
       router.push("/")
   }
 
@@ -68,6 +68,7 @@ const handleDashboard =(e)=>{
                       <Menu as="div" className="relative ml-3">
                         <div>
                           <Menu.Button className="flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                            <a className='hidden md:flex text-sm text-gray-300 font-semibold mx-4'>{user.name}</a>
                             <img className="h-8 w-8 rounded-full" src={user.imageUrl} alt="" />
                           </Menu.Button>
                         </div>
