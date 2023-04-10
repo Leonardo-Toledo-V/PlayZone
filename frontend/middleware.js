@@ -6,4 +6,7 @@ export default function middleware(req){
     if (!verify && url.includes("/dashboard")){
         return NextResponse.redirect(process.env.DOMAIN_URL); 
     }
+    if (!verify && url.includes("/sales")){
+        return NextResponse.redirect(process.env.DOMAIN_URL); 
+    }
 }

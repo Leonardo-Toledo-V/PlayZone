@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Videogames;
 use \Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Illuminate\Database\QueryException;
+use \Illuminate\Support\Facades\Storage;
 
 class VideogamesController extends Controller
 {
@@ -32,10 +33,14 @@ class VideogamesController extends Controller
      */
     public function store(Request $request)
 {
+    $fileName = time().'.'.$request->file("cover")->getClientOriginalExtension();  
+        
+    $path=$request->file('cover')->move(('../../frontend/public'), $fileName);
+
     try {
         $videogame = new Videogames;
         $videogame->title = $request->input('title');
-        $videogame->cover = $request->input('cover');
+        $videogame->cover = $fileName;
         $videogame->description = $request->input('description');
         $videogame->price = $request->input('price');
         $videogame->save();
@@ -97,11 +102,19 @@ class VideogamesController extends Controller
                 'message' => 'Videogame not found'
             ];
             return response()->json($response,404);
-        }
-        $videogame->fill($request->only([
-            'title', 'cover', 'description', 'price'
-        ]));
+        } 
         
+        if($request->hasFile('cover') && $request->file('cover')->isValid()){
+            $path=$videogame->cover;
+            Storage::disk('frontend')->delete($path);
+            $fileName = time().'.'.$request->file("cover")->getClientOriginalExtension();  
+            $path=$request->file('cover')->move(('../../frontend/public'), $fileName);
+            $videogame->cover = $fileName;
+        }
+
+        $videogame->title = $request->has('title') && $request->get('title') !=null &&$request->get('title')!='' ? $request->get('title') : $videogame->title;
+        $videogame->description = $request->has('description') && $request->get('description') !=null &&$request->get('description')!='' ? $request->get('description') : $videogame->description;
+        $videogame->price = $request->has('price')&& $request->get('price') !=null &&$request->get('price')!=''? $request->get('price') : $videogame->price;
         $videogame->save();
 
         $response = [
@@ -132,6 +145,9 @@ class VideogamesController extends Controller
             ];
             return response()->json($response, 404);
         }
+        
+            $path=$videogame->cover;
+            Storage::disk('frontend')->delete($path);
             $videogame -> delete();
             $response = [
                 'status' => 'success',

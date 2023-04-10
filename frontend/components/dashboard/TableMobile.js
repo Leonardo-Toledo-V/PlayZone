@@ -3,24 +3,30 @@ import React, { Fragment, useContext, useState } from 'react'
 import Swal from 'sweetalert2';
 import Modal from '../Modal';
 import Update from './crud/Update';
+import axios from '@/libs/axios';
 
 function TableMobile(props) {
-    const testData = props.testData;
+    const data = props.data;
+    if(data.length === 0){
+      return(
+        <div className='flex justify-center h-[400px] flex-grow text-gray-500 text-sm font-semibold my-12'>There is not games to show</div>
+      )
+    }
     const { searchTerm } = useContext(SearchContext);
 
     const [showModal, setShowModal] = useState(false);
     const [id, setId] = useState(null);
 
-    const filteredGames = testData.filter((game) => {
+    const filteredGames = data.filter((game) => {
         return (
-          game.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          game.description.toLowerCase().includes(searchTerm.toLowerCase())
+          game.title.toLowerCase().includes(searchTerm.toLowerCase())
         );
       });
 
 
       const handleDelete =(e)=>{
         e.preventDefault();
+        const id = e.target.id;
         const swalWithBootstrapButtons = Swal.mixin({
             customClass: {
               confirmButton: 'cursor-pointer p-1.5 text-sm font-medium uppercase tracking-wider text-green-800 bg-green-200 rounded-sm bg-opacity-50 m-2',
@@ -38,9 +44,10 @@ function TableMobile(props) {
             cancelButtonText: 'No, cancel!',
           }).then((result) => {
             if (result.isConfirmed) {
+              axios.delete(`api/videogames/${id}`)
               swalWithBootstrapButtons.fire(
                 'Deleted!',
-                'Your file has been deleted.',
+                'Your videogame has been deleted.',
                 'success'
               ).then(() => {window.location.reload();});
             } else if (
@@ -89,7 +96,7 @@ function TableMobile(props) {
                                     </span>
                                 </div>
                                 <div>
-                                    <span onClick={handleDelete} className="cursor-pointer p-1.5 text-sm font-medium  tracking-wider text-red-800 bg-red-200 rounded-sm bg-opacity-50">
+                                    <span id={game.id} onClick={handleDelete} className="cursor-pointer p-1.5 text-sm font-medium  tracking-wider text-red-800 bg-red-200 rounded-sm bg-opacity-50">
                                         Delete
                                     </span>
                                 </div>
@@ -103,7 +110,7 @@ function TableMobile(props) {
             })}
               <Fragment>
         <Modal isVisible={showModal} onClose={()=> setShowModal(false)}>
-            <Update testData={testData} id={id}/>
+            <Update data={data} id={id}/>
         </Modal>
     </Fragment>
         </div>
