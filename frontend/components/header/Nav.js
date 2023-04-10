@@ -19,10 +19,11 @@ function Nav() {
         setSearchTerm(e.target.value);
     }
 
+
     return (
-        <nav className="flex justify-around items-center w-full px-6 pb-4 pt-4 mx-auto shadow-lg sticky top-0 z-50 bg-slate-800">
+        <nav className="flex justify-around items-center w-full px-6 pb-4 pt-4 mx-auto shadow-lg sticky top-0 z-50 bg-gray-800">
             <div>
-                <img className="w-36 cursor-pointer" src="logo.png" alt="..." />
+                <img className="w-36 cursor-pointer" src="logo.png" alt="..."/>
             </div>
             <div className="static md:w-auto  w-full flex items-center px-5">
                 <div className="pt-2 relative mx-auto text-gray-600">

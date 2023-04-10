@@ -10,4 +10,5 @@ class Shoppings extends Model
     use HasFactory;
     public $timestamps = false;
     protected $fillable= ['fullName', 'email', 'id_videogame'];
+    
 }

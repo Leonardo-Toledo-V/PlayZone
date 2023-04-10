@@ -1,41 +1,46 @@
+import { PageContext } from '@/context/PageProvider';
+import React, { useContext } from 'react'
 
 export default function Pagination() {
+    const { page, setPage, lastPage } = useContext(PageContext);
+
+    const handleNext =(e)=>{
+        e.preventDefault();
+        if(page < lastPage){
+            setPage(page+1)
+        }
+       
+    }
+    const handlePrevious =(e)=>{
+        e.preventDefault();
+        if(page>=2){
+            setPage(page-1)
+        }
+    }
     return (
-        <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 bottom-0 ">
-            <div className="flex flex-1 items-center justify-end">
-                <div>
+        <div className="flex items-center justify-between bg-white px-4 pt-3 sm:px-6  ">
+            <div className="flex flex-1 items-center justify-center md:justify-end">
                     <nav
                         className="isolate inline-flex -space-x-px rounded-md shadow-sm"
                         aria-label="Pagination">
-                             <a
+                        <a
+                            onClick={handlePrevious}
                             href="#"
-                            aria-current="page"
-                            className="relative z-10 inline-flex items-center bg-gray-800 px-4 py-2 text-sm font-semibold text-white focus:z-20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            1
+                            className="relative items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 inline-flex">
+                            {"<"}
                         </a>
                         <a
                             href="#"
-                            className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0">
-                            2
+                            className="relative cursor-text  items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300  focus:outline-offset-0 inline-flex">
+                            Page: {page}
                         </a>
                         <a
+                            onClick={handleNext}
                             href="#"
-                            className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ">
-                            3
+                            className="relative items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 inline-flex">
+                            {">"}
                         </a>
-                        <a
-                            href="#"
-                            className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 ">
-                            4
-                        </a>
-                        <a
-                            href="#"
-                            className="relative hidden  items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20 focus:outline-offset-0 md:inline-flex">
-                            5
-                        </a>
-
                     </nav>
-                </div>
             </div>
         </div>
     )

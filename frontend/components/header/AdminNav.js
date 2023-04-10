@@ -33,6 +33,9 @@ const handleDashboard =(e)=>{
     e.preventDefault();
     router.push("/dashboard")
 }
+const handleExit =(e)=>{
+  router.push("/")
+};
 
   
   return (
@@ -46,9 +49,10 @@ const handleDashboard =(e)=>{
                   <div className="flex items-center">
                     <div className="flex-shrink-0">
                       <img
-                        className="h-8 w-36"
+                        className="h-8 w-36 cursor-pointer"
                         src="logo.png"
                         alt="Your Company"
+                        onClick={handleExit} 
                       />
                     </div>
                     <div className="hidden md:block">

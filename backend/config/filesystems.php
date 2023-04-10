@@ -43,6 +43,10 @@ return [
             'visibility' => 'public',
             'throw' => false,
         ],
+        'frontend' => [
+            'driver' => 'local',
+            'root' => public_path('../../frontend/public'),
+        ],
 
         's3' => [
             'driver' => 's3',

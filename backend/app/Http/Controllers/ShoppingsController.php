@@ -18,7 +18,6 @@ class ShoppingsController extends Controller
         $perPage = 10;
         $page = $request->query('page', 1);
         $shoppings = Shoppings::paginate($perPage, ['*'], 'page', $page);
-    
         if ($page > $shoppings->lastPage()) {
             $response = [
                 'status' => 'error',
