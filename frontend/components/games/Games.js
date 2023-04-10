@@ -25,6 +25,14 @@ function Games() {
         );
       });
 
+      if(data.length === 0){
+        return(
+          <div className='flex justify-center  items-center h-[400px] flex-grow text-gray-500 text-sm font-semibold my-12'>
+          We don't have videogames to show you, but we are going to add more later, thanks for your patience!:)
+          </div>
+        )
+      }
+
       const handleSearch =(e)=>{
         setSearchTerm(e.target.value);
     }

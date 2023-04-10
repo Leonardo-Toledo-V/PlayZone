@@ -1,4 +1,3 @@
-import Footer from '@/components/Footer';
 import Shop from '@/components/Shop';
 import Head from 'next/head';
 import React from 'react'
@@ -13,7 +12,6 @@ function shop() {
             <link rel="icon" href="/gaming.png" />
           </Head>
           <Shop/>
-          <Footer/>
     </>
   )
 }

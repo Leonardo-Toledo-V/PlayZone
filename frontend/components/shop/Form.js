@@ -4,27 +4,30 @@ import NotShop from './NotShop'
 import { useRouter } from 'next/router'
 import Swal from 'sweetalert2'
 import axios from '@/libs/axios'
+import { PageContext } from '@/context/PageProvider'
 
 function Form() {
     const [data, setData] = useState([])
     const { shop } = useContext(ShopContext)
     const router = useRouter()
     const form = new FormData()
-    const [email, setEmail] = useState('')
-    const [fullName, setfullName] = useState('')
+    const [email, setEmail] = useState('');
+    const [fullName, setfullName] = useState('');
+    const { page } = useContext(PageContext);
+    useEffect(()=>{
+        axios.get(`/api/videogames?page=${page}`).then(function(response){
+            setData(response.data.data)
+           });
+    },[]);
+    
 
     if (!shop) {
         return <NotShop />
     }
-    useEffect(() => {
-        axios.get('/api/videogames').then(function (response) {
-            setData(response.data.data)
-        })
-    }, [])
     const result = data.find(item => item.id === shop)
     if (!result) {
         return (
-            <div className="flex justify-center items-center font-medium text-sm text-gray-500">
+            <div className="flex justify-center mt-32 items-center font-medium text-sm text-gray-500">
                 Loading...
             </div>
         )
