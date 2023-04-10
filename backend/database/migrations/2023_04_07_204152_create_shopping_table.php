@@ -16,7 +16,7 @@ return new class extends Migration
                 $table->id()->autoincrement();
                 $table->string('fullName');
                 $table->string('email');
-                $table->foreignId('id_videogame')->constrained('videogames');
+                $table->foreignId('id_videogame')->constrained('videogames')->onDelete('cascade');
             });
         }
     }

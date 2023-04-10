@@ -17,7 +17,7 @@ function InfoGame({ info }) {
         <>
         <div className="flex flex-col md:flex-row md:w-full">
             <div className="bg-cover bg-no-repeat bg-center flex justify-center md:p-6 md:w-1/2">
-                <img className='w-[250px] sm:w-[300px] md:w-[350px] lg:w-[450px]  2xl:w-[600px] mt-4 shadow-xl mb-4' alt="" src={cover} />
+                <img className='w-[250px] sm:w-[300px] md:w-[350px] lg:w-[450px]  2xl:w-[600px] max-h-[570px] max-w-[400px] mt-4 shadow-xl mb-4' alt="" src={cover} />
             </div>
             <div className='flex flex-col pt-6 px-12 md:p-6 md:w-1/2'>
             <h2 className="text-2xl font-sm text-gray-600 mt-2">{title}</h2>

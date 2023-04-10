@@ -15,7 +15,7 @@ return new class extends Migration
             Schema::create('Videogames', function (Blueprint $table) {
                 $table->id()->autoIncrement();
                 $table->string('title');
-                $table->string('description');
+                $table->string('description', 1500);
                 $table->string('cover');
                 $table->string('price');
             });

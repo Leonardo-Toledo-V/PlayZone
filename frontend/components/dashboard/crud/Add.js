@@ -67,7 +67,7 @@ import axios from '@/libs/axios';
               </label>
               <div className="mt-2">
                 <textarea
-                  maxLength="255"
+                  maxLength="1500"
                   id="description"
                   type="text"
                   autoComplete="off"
