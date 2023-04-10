@@ -86,7 +86,7 @@ function TableMobile(props) {
                                     ${game.price}
                                 </div>
                             </div>
-                            <div className="flex justify-center items-center text-sm text-gray-700">
+                            <div className=" text-sm text-gray-700 truncate">
                                 {game.description}
                             </div>
                             <div className='flex items-center justify-center space-x-2'>

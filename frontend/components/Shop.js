@@ -3,7 +3,7 @@ import Form from './shop/Form'
 
 function Shop() {
   return (
-    <div className="w-full h-screen flex items-start">
+    <div className="w-full flex items-start">
     <div className="sm:relative w-full md:w-3/5 h-full flex flex-col">
         <Form/>
     </div>
